@@ -1,0 +1,24 @@
+
+# Package Files and binary distributables #
+*.jar
+*.war
+*.ear
+*.exe
+
+# Back and log files #
+*.bak
+*~
+*.log
+
+# Build and doc directories #
+build/
+apidoc/
+javadoc/
+**/build/
+**/apidoc/
+**/javadoc/
+
+# Directories with intermediate files #
+netbeans/
+
+
