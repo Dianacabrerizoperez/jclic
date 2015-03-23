@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8">
+    <title>Proves JClic</title>
+
+    <script src="../includes/jquery/jquery-2.1.1.js"></script>
+    <script src="../includes/jquery-ui/jquery-ui-1.10.4.js"></script>
+    <script src="../jclic/utilities.js"></script>
+    <script src="../jclic/jclicproject.js"></script>
+    <script src="../jclic/jclic.js"></script>
+    <script src="../jclic/jclicplayer.js"></script>
+    
+    <script src="../jclic/test.js"></script>
+    
+    <link rel="stylesheet" href="../jclic/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="../jclic/reset.css" type="text/css" />
+    <link rel="stylesheet" href="../jclic/jclic.css" type="text/css" />
+    
+    <link rel="stylesheet" href="../jclic/test.css" type="text/css" />    
+    
+  </head>
+  <body>
+    <h2>Proves amb JClic i JQuery</h2>
+    <p><a href="../test/testsvg.html">TestSVG</a></p>
+    
+    <pre id="debug"></pre>
+
+    <div id="prjSettings">
+      <p>Project: "<span id="name">---</span>" ver. <span id="version">-</span> <span id="type"></span> <span id="code"></span></p>
+      <p>Activity: "<span id="actName">---</span>"</p>
+    </div>
+
+    <div id="selectorArea">
+      <select id="selector"></select>
+    </div>
+    <div id="jclic-container">
+      <div id="main"></div>
+      <div id="jclic-bottom-area">
+        <button class="jclicBtn" id="prevBtn">&lt;</button>
+        <button class="jclicBtn" id="nextBtn">&gt;</button>
+        <div class="message" id="initial"></div>
+      </div>
+    </div>
+    <p>Elements auxiliars:</p>
+    <div id="aux">
+      <div class="message" id="final"></div>      
+    </div>
+    <div id="status"></div>
+  </body>
+</html>

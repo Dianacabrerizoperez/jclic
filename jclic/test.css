@@ -1,0 +1,79 @@
+/***************************************
+   Default Styles
+************************************** */
+
+* {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+overflow: auto;
+}
+
+html, body {
+}
+
+body {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#jclic-container {
+  margin: auto;
+  padding: 0px;
+  width: 800px;  
+  border: 4px solid brown;
+}
+
+#jclic-text-area {
+  margin: 0px;
+  padding: 4px;
+  text-align: left;  
+}
+
+#jclic-primary-cells {
+  background-color: darkseagreen;
+}
+
+#jclic-secondary-cells {
+  background-color: darkseagreen;
+}
+
+#jclic-solved-cells {
+  background-color: burlywood;
+}
+
+
+#jclic-bottom-area {
+  vertical-align: middle;
+  background-color: beige;
+  border: solid thin black;
+}
+
+.jclicBtn {
+
+}
+
+.message {
+  min-height: 40px;
+  height: 40px;
+  border: solid 1px black;
+  vertical-align: middle;
+  text-align: center;
+  background-color:antiquewhite;
+}
+
+.counters {
+  width: 80px;
+  vertical-align: middle;
+  font-family: monospace;
+  font-weight: bolder;
+  font-size: 18pt;  
+}
+
+.vCentered p {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
