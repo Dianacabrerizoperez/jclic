@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>Canvas Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+      .mainContent {
+        background-color: azure;
+        display: block;
+        font-family: Arial;
+        font-size: 16px;
+        height: 700p  x;
+        width:900px;
+        border: solid;
+        box-sizing: border-box;
+        vertical-align: baseline;       
+      }
+      .textContainer{
+        overflow: auto;
+      }
+      .theText {
+        border: solid;
+        width: 544px;
+        height: 362px;        
+        position: absolute;
+        left: 20px;
+        top: 40px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>Canvas Test</h2>
+      <p>Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas. Testing how text objects can overlap canvas.</p>
+      <div class="mainContent">
+        <canvas id="theCanvas" width="600" height="400" style="border-width: 2px; border-color: blue;">
+          <p>Text dins del Canvas (no es mostra)</p>
+        </canvas>
+        <div class="textContainer">
+          <div class="theText">
+            <p>
+              <span style="color: rgb(255, 255, 255); display: inline-block; text-align: left; border: black; width: 500px; height: 60px; vertical-align: middle; background-color: rgb(0, 128, 128);"></span>
+            </p>
+            <p>Corregiu les errades que hi ha en aquestes frases:</p>
+            <p>&nbsp;</p>
+            <p>L'<span>excés</span> de velocitat ha causat l'accident.</p>
+            <p>&nbsp;</p>
+            <p>El seu <span>aplom</span> ens encoratja a tots.</p>
+            <p>&nbsp;</p>
+            <p>No acabaré el treball fins al <span>migdia</span>.</p>
+            <p>&nbsp;</p>
+            <p>Ecs, quin <span>fàstic</span> que fa!</p><p>&nbsp;</p><p>És una regla ortogràfica que no té cap <span>excepció</span>.</p><p>&nbsp;</p><p>Va caure <span>daltabaix</span>.</p><p>&nbsp;</p><p>Tot ho fa de <span>mal grat</span>.</p><p>&nbsp;</p><p>A la prova, s'hi va presentar un <span>examinand</span>.</p><p>&nbsp;</p><p>Si esteu <span>a punt</span>, podreu venir amb nosaltres.</p><p>&nbsp;</p><p>Per <span>accedir</span>-hi, hi heu d'anar a peu.</p><p>&nbsp;</p><p>Heu de resoldre el problema <span>multiplicant</span>.</p><p>&nbsp;</p><p style="font-size: 11px;"><span style="font-size: 11px;">Curs de llengua catalana "El catala es facil"</span></p><p style="font-size: 11px;"><span style="font-size: 11px;">Ed. Castellnou</span></p><p style="font-size: 11px;"><span style="font-size: 11px;">J. Badia, J. Balcells, N. Bergua, N. Brugarolas i J. Grifoll, 1998</span></p></div>        
+        </div>
+      </div>
+      <script>
+        var canvas = document.getElementById('theCanvas');
+        var context = canvas.getContext('2d');
+
+        context.lineWidth = 5;
+        context.strokeStyle = 'red';
+        //context.rect(0, 0, context.canvas.clientWidth, context.canvas.clientHeight);
+        context.rect(0, 0, context.canvas.width, context.canvas.height);
+        context.stroke();
+
+        // do cool things with the context
+        context.font = '40pt Calibri';
+        context.fillStyle = 'blue';
+        context.fillText('Hello World!', 150, 100);
+
+        // begin custom shape
+        context.beginPath();
+        context.moveTo(170, 80);
+        context.bezierCurveTo(130, 100, 130, 150, 230, 150);
+        context.bezierCurveTo(250, 180, 320, 180, 340, 150);
+        context.bezierCurveTo(420, 150, 420, 120, 390, 100);
+        context.bezierCurveTo(430, 40, 370, 30, 340, 50);
+        context.bezierCurveTo(320, 5, 250, 20, 250, 50);
+        context.bezierCurveTo(200, 5, 150, 20, 170, 80);
+
+        // complete custom shape
+        context.closePath();
+        context.lineWidth = 5;
+        context.strokeStyle = 'blue';
+        context.stroke();
+      </script>      
+    </div>
+  </body>
+</html>
