@@ -50,7 +50,7 @@ function checkColor(color, defaultColor) {
 // Reads 'p' blocks inside XML elements
 function getXmlText(xml) {
   var text = '';
-  $(xml).children('p').each(function() {
+  $(xml).children('p').each(function () {
     text += '<p>' + this.textContent + '</p>';
   });
   return text;
@@ -85,23 +85,23 @@ function getGradientCSS(gradient) {
   return css;
 }
 
-function SVG(tag){
-   return document.createElementNS('http://www.w3.org/2000/svg', tag);
+function SVG(tag) {
+  return document.createElementNS('http://www.w3.org/2000/svg', tag);
 }
 
 
 function getSVGshapes(shaper, width, height, baseID) {
 
-  var $svg=$(SVG('svg')).attr({width: 0, height: 0});  
+  var $svg = $(SVG('svg')).attr({width: 0, height: 0});
   var $defs = $(SVG('defs'));
   var count = 0;
-  
+
   // TODO: scaleX, scaleY?
   switch (shaper.class) {
-    case '@Rectangular':
     case '@JigSaw':
     case '@ClassicJigSaw':
     case '@TriangularJigSaw':
+    case '@Rectangular':
       //var cellWidth = width / shaper.cols;
       //var cellHeight = height / shaper.rows;
       var cellWidth = 1 / shaper.cols;
@@ -123,47 +123,47 @@ function getSVGshapes(shaper, width, height, baseID) {
       }
       break;
 
-    case '@Holes':     
-      var x0=0, y0=0, shw=1, shh=1;
+    case '@Holes':
+      var x0 = 0, y0 = 0, shw = 1, shh = 1;
       var n = 3;
-        if(shaper.enclosing.action === 'rectangle'){
-          x0=shaper.enclosing.data[0];
-          y0=shaper.enclosing.data[1];
-          shw=shaper.enclosing.data[2]-x0;
-          shh=shaper.enclosing.data[3]-y0;          
-        }
+      if (shaper.enclosing.action === 'rectangle') {
+        x0 = shaper.enclosing.data[0];
+        y0 = shaper.enclosing.data[1];
+        shw = shaper.enclosing.data[2] - x0;
+        shh = shaper.enclosing.data[3] - y0;
+      }
       for (var i = 0; i < shaper.sh.length; i++) {
-        
+
         var $clipPath = $(SVG('clipPath')).attr('id', baseID + '_' + count++);
-        
+
         // Workaround to avoid JQuery lowercase capitalization
         //$clipPath.attr('clipPathUnits', 'objectBoundingBox');
         $clipPath[0].setAttribute('clipPathUnits', 'objectBoundingBox');
-        
+
         var sd = shaper.sh[i];
-        var x0=sd[0].data[0]/shw;
-        var y0=sd[0].data[1]/shh;
-        
+        var x0 = sd[0].data[0] / shw;
+        var y0 = sd[0].data[1] / shh;
+
         switch (sd[0].action) {
-          
+
           case 'rectangle':
             $clipPath.append($(SVG('rect')).attr({
               x: (x0).toFixed(n),
               y: (y0).toFixed(n),
-              width: (sd[0].data[2]/shw).toFixed(n),
-              height: (sd[0].data[3]/shh).toFixed(n)
+              width: (sd[0].data[2] / shw).toFixed(n),
+              height: (sd[0].data[3] / shh).toFixed(n)
             }));
             break;
-            
+
           case 'ellipse':
-            var rx=sd[0].data[2]/2/shw;
-            var ry=sd[0].data[3]/2/shh;
-            var s = 'M ' + (x0).toFixed(n) + ',' + (y0+ry).toFixed(n) +
+            var rx = sd[0].data[2] / 2 / shw;
+            var ry = sd[0].data[3] / 2 / shh;
+            var s = 'M ' + (x0).toFixed(n) + ',' + (y0 + ry).toFixed(n) +
                     ' a ' + (rx).toFixed(n) + ',' + (ry).toFixed(n) + ' 0 1,1 0,0.0001' +
                     ' Z';
             $clipPath.append($(SVG('path')).attr('d', s));
             break;
-            
+
           default:
             var s = '';
             var closed = false;
@@ -171,22 +171,22 @@ function getSVGshapes(shaper, width, height, baseID) {
               switch (sd[j].action) {
                 case 'M':
                   // Move To
-                  s += ' M ' + (sd[j].data[0]/shw).toFixed(n) + ',' + (sd[j].data[1]/shh).toFixed(n);
+                  s += ' M ' + (sd[j].data[0] / shw).toFixed(n) + ',' + (sd[j].data[1] / shh).toFixed(n);
                   break;
                 case 'L':
                   // Line To
-                  s += ' L ' + (sd[j].data[0]/shw).toFixed(n) + ',' + (sd[j].data[1]/shh).toFixed(n);
+                  s += ' L ' + (sd[j].data[0] / shw).toFixed(n) + ',' + (sd[j].data[1] / shh).toFixed(n);
                   break;
                 case 'Q':
                   // Quad to
-                  s += ' Q ' + (sd[j].data[0]/shw).toFixed(n) + ' ' + (sd[j].data[1]/shh).toFixed(n) + ' ' 
-                          + (sd[j].data[2]/shw).toFixed(n) + ' ' + (sd[j].data[3]/shh).toFixed(n);
+                  s += ' Q ' + (sd[j].data[0] / shw).toFixed(n) + ' ' + (sd[j].data[1] / shh).toFixed(n) + ' '
+                          + (sd[j].data[2] / shw).toFixed(n) + ' ' + (sd[j].data[3] / shh).toFixed(n);
                   break;
                 case 'B':
                   // Cubic to
-                  s += ' C ' + (sd[j].data[0]/shw).toFixed(n) + ' ' + (sd[j].data[1]/shh).toFixed(n) + ' ' 
-                          + (sd[j].data[2]/shw).toFixed(n) + ' ' + (sd[j].data[3]/shh).toFixed(n) + ' ' 
-                          + (sd[j].data[4]/shw).toFixed(n) + ' ' + (sd[j].data[5]/shh).toFixed(n);
+                  s += ' C ' + (sd[j].data[0] / shw).toFixed(n) + ' ' + (sd[j].data[1] / shh).toFixed(n) + ' '
+                          + (sd[j].data[2] / shw).toFixed(n) + ' ' + (sd[j].data[3] / shh).toFixed(n) + ' '
+                          + (sd[j].data[4] / shw).toFixed(n) + ' ' + (sd[j].data[5] / shh).toFixed(n);
                   break;
                 case 'X':
                   // Close path
@@ -195,19 +195,114 @@ function getSVGshapes(shaper, width, height, baseID) {
                   break;
               }
             }
-            if(!closed)
+            if (!closed)
               s += ' Z';
             $clipPath.append($(SVG('path')).attr('d', s));
             break;
         }
-        $clipPath.appendTo($defs);        
+        $clipPath.appendTo($defs);
       }
       break;
   }
 
   $defs.appendTo($svg);
-  
+
   return $svg;
+}
+
+
+var PathIterator = {
+  WIND_NON_ZERO: true,
+  SEG_LINETO: "lt",
+  SEG_QUADTO: "qt",
+  SEG_CUBICTO: "ct",
+  SEG_CLOSE: "cl"
+};
+
+function ShapeData() {
+  var CAPACITY_BLOCK = 6;
+  this.points = [2 * CAPACITY_BLOCK];
+  this.pointsIndex = 0;
+  this.descriptors = [CAPACITY_BLOCK];
+  this.descriptorsIndex = 0;
+  this.windingRule = PathIterator.WIND_NON_ZERO;
+  this.primitivePoints = [];
+  this.primitiveType = -1;
+  this.comment = null;
+
+  this.addDescriptor = function (descriptor) {
+    this.descriptors[this.descriptorsIndex++] = descriptor;
+  };
+
+  this.addData = function (data) {
+    for (var d in data)
+      this.points[this.pointsIndex++] = d;
+  };
+
+  this.add = function (descriptor, data) {
+    this.addDescriptor(descriptor);
+    if (data !== undefined && data !== null)
+      this.addData(data);
+  };
+
+  this.moveTo = function (x, y) {
+    add(PathIterator.SEG_MOVETO, [x, y]);
+  };
+
+  this.lineTo = function (x, y) {
+    add(PathIterator.SEG_LINETO, [x, y]);
+  };
+
+  this.quadTo = function (x0, y0, x1, y1) {
+    add(PathIterator.SEG_QUADTO, [x0, y0, x1, y1]);
+  };
+
+  this.cubicTo = function (x0, y0, x1, y1, x2, y2) {
+    add(PathIterator.SEG_CUBICTO, [x0, y0, x1, y1, x2, y2]);
+  };
+
+  this.closePath = function () {
+    add(PathIterator.SEG_CLOSE);
+  };
+
+  this.setWindingRule = function (setRule) {
+    this.windingRule = setRule;
+  };
+
+  this.scaleTo = function (scaleX, scaleY) {
+    for (var i = 0; i < this.points.length; i += 2) {
+      this.points[i] /= scaleX;
+      this.points[i + 1] /= scaleY;
+    }
+
+    for (var i = 0; i < this.primitivePoints.length; i += 2) {
+      this.primitivePoints[i] /= scaleX;
+      this.primitivePoints[i + 1] /= scaleY;
+    }
+  };
+  
+}
+
+
+function Shaper(nx, ny) {
+
+  this.reset(nx, ny);
+
+  this.reset = function (nCols, nRows) {
+    if(nCols !== undefined)
+      this.nCols = nCols;
+    if(nRows !== undefined)
+      this.nRows = nRows;
+    this.nCells = nRows * nCols;
+    this.initiated = false;
+    this.shapeData = [this.nCells];
+    for (i = 0; i < this.nCells; i++)
+      this.shapeData[i] = new ShapeData();
+  };
+
+    
+
+  
 }
 
 
