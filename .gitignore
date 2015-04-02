@@ -19,6 +19,5 @@ javadoc/
 **/javadoc/
 
 # Directories with intermediate files #
-netbeans/
-
-
+/nbproject
+/nbproject/private/
